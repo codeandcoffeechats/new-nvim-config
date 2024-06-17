@@ -75,8 +75,19 @@ vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
 vim.keymap.set("v", "d", '"_d', { noremap = true, silent = true })
 vim.keymap.set("n", "cc", '"_cc', { noremap = true, silent = true })
 vim.keymap.set("v", "c", '"_c', { noremap = true, silent = true })
-vim.keymap.set("n", "p", "p", { noremap = true, silent = true })
+vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
+vim.keymap.set("v", "D", '"_D', { noremap = true, silent = true })
+vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
+vim.keymap.set("v", "C", '"_C', { noremap = true, silent = true })
+vim.keymap.set("n", "p", 'p', { noremap = true, silent = true })
 vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
+vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true })
+vim.keymap.set("v", "x", '"_x', { noremap = true, silent = true })
+
+-- Yank to the system clipboard
+vim.keymap.set("n", "y", '"+y', { noremap = true, silent = true })
+vim.keymap.set("v", "y", '"+y', { noremap = true, silent = true })
+
 
 --when you highlight, you can move lines. in highlight mode try shift+j/k to move
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
