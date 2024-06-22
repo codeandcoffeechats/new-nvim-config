@@ -60,12 +60,6 @@ vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap
 vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-vim.keymap.set("n", "<leader>wm", function()
-	LazyVim.toggle.maximize()
-end, { desc = "Maximize Toggle" })
-vim.keymap.set("n", "<leader>m", function()
-	LazyVim.toggle.maximize()
-end, { desc = "Maximize Toggle" })
 
 -- select all
 vim.keymap.set("n", "<C-a>", "ggVG", {})
@@ -104,3 +98,10 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- use O or o to crate new lines without transition into insert mode.
 vim.keymap.set("n", "<leader>o", "o<esc>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>O", "O<esc>", { noremap = true, silent = true })
+
+-- Open diagnostic flaot winow
+vim.keymap.set("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+
+-- jump to diagnostic
+vim.keymap.set("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
