@@ -48,11 +48,6 @@ vim.keymap.set("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- LazyVim Changelog
-vim.keymap.set("n", "<leader>L", function()
-	LazyVim.news.changelog()
-end, { desc = "LazyVim Changelog" })
-
 -- windows
 vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
@@ -103,5 +98,6 @@ vim.keymap.set("n", "<leader>O", "O<esc>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 
 -- jump to diagnostic
-vim.keymap.set("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
+
