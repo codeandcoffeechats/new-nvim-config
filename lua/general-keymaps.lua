@@ -68,7 +68,7 @@ vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
 vim.keymap.set("v", "D", '"_D', { noremap = true, silent = true })
 vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
 vim.keymap.set("v", "C", '"_C', { noremap = true, silent = true })
-vim.keymap.set("n", "p", 'p', { noremap = true, silent = true })
+vim.keymap.set("n", "p", "p", { noremap = true, silent = true })
 vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
 vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true })
 vim.keymap.set("v", "x", '"_x', { noremap = true, silent = true })
@@ -76,7 +76,6 @@ vim.keymap.set("v", "x", '"_x', { noremap = true, silent = true })
 -- Yank to the system clipboard
 vim.keymap.set("n", "y", '"+y', { noremap = true, silent = true })
 vim.keymap.set("v", "y", '"+y', { noremap = true, silent = true })
-
 
 --when you highlight, you can move lines. in highlight mode try shift+j/k to move
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
@@ -101,3 +100,4 @@ vim.keymap.set("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { 
 -- vim.keymap.set("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
 
+vim.keymap.set("n", "0", "^", { noremap = true, silent = true })
