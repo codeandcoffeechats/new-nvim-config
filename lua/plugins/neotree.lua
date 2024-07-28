@@ -18,14 +18,8 @@ return {
 			vim.cmd("Neotree reveal left " .. cwd)
 		end
 
-		-- Function to reveal Neo-tree in the root directory
-		local function toggle_neotree_root()
-			local root = vim.fn.getcwd()
-			vim.cmd("Neotree toggle " .. root)
-		end
-
 		-- Key mappings
 		vim.keymap.set("n", "<leader>E", open_neotree_cwd, {})
-		vim.keymap.set("n", "<leader>e", toggle_neotree_root, {})
+		vim.keymap.set("n", "<leader>e", '<Cmd>Neotree toggle<CR><CR>', {})
 	end,
 }
