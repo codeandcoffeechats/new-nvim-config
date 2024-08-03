@@ -10,7 +10,10 @@ return {
 	config = function()
 
     require("neo-tree").setup({
-      close_if_last_window = true
+      close_if_last_window = true,
+      window = {
+        position = "float"
+      }
     })
 
 		local function open_neotree_cwd()
@@ -20,6 +23,6 @@ return {
 
 		-- Key mappings
 		vim.keymap.set("n", "<leader>E", open_neotree_cwd, {})
-		vim.keymap.set("n", "<leader>e", '<Cmd>Neotree toggle<CR><CR>', {})
+		vim.keymap.set("n", "<leader>e", '<Cmd>Neotree float toggle<CR><CR>', {})
 	end,
 }
