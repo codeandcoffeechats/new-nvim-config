@@ -1,103 +1,106 @@
-vim.keymap.set("i", "jk", "<Esc>", {})
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+map("i", "jk", "<Esc>", {})
 
 -- copy in Visula mode
-vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
+map("v", "<C-c>", '"+y', opts)
 
 -- better up/down
-vim.keymap.set({ "n", "x" }, "j", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "k", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "j", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-vim.keymap.set("n", "<C-Up>", "<cmd>resize +6<cr>", { desc = "Increase Window Height" })
-vim.keymap.set("n", "<C-Down>", "<cmd>resize 2<cr>", { desc = "Decrease Window Height" })
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize 2<cr>", { desc = "Decrease Window Width" })
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase Window Width" })
+map("n", "<C-Up>", "<cmd>resize +6<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize 2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize 2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
-vim.keymap.set("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Down" })
-vim.keymap.set("n", "<A-k>", "<cmd>m .2<cr>==", { desc = "Move Up" })
-vim.keymap.set("i", "<A-j>", "<esc><cmd>m .+5<cr>==gi", { desc = "Move Down" })
-vim.keymap.set("i", "<A-k>", "<esc><cmd>m .2<cr>==gi", { desc = "Move Up" })
-vim.keymap.set("v", "<A-j>", ":m '>+5<cr>gv=gv", { desc = "Move Down" })
-vim.keymap.set("v", "<A-k>", ":m '<2<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<cmd>m .2<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><cmd>m .+5<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><cmd>m .2<cr>==gi", { desc = "Move Up" })
+map("v", "<A-j>", ":m '>+5<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", ":m '<2<cr>gv=gv", { desc = "Move Up" })
 
 -- Clear search with <esc>
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
 -- save file
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 --keywordprg
-vim.keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- lazy
-vim.keymap.set("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
 
 -- new file
-vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- windows
-vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
-vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
-vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>ww", "<C-W>p", { desc = "Other Window", remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+map("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- select all
-vim.keymap.set("n", "<C-a>", "ggVG", {})
+map("n", "<C-a>", "ggVG", {})
 
 -- keybinding to prevent yanking while changing or Deleting text.
-vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
-vim.keymap.set("v", "d", '"_d', { noremap = true, silent = true })
-vim.keymap.set("n", "cc", '"_cc', { noremap = true, silent = true })
-vim.keymap.set("v", "c", '"_c', { noremap = true, silent = true })
-vim.keymap.set("n", "D", '"_D', { noremap = true, silent = true })
-vim.keymap.set("v", "D", '"_D', { noremap = true, silent = true })
-vim.keymap.set("n", "C", '"_C', { noremap = true, silent = true })
-vim.keymap.set("v", "C", '"_C', { noremap = true, silent = true })
-vim.keymap.set("n", "p", "p", { noremap = true, silent = true })
-vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
-vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true })
-vim.keymap.set("v", "x", '"_x', { noremap = true, silent = true })
+map("n", "<leader>dd", '"_dd', opts)
+map("v", "<leader>d", '"_d', opts)
+map("n", "cc", '"_cc', opts)
+map("v", "c", '"_c', opts)
+map("n", "D", '"_D', opts)
+map("v", "D", '"_D', opts)
+map("n", "C", '"_C', opts)
+map("v", "C", '"_C', opts)
+map("n", "p", "p", opts)
+map("v", "p", '"_dP', opts)
+map("n", "x", '"_x', opts)
+map("v", "x", '"_x', opts)
 
 -- Yank to the system clipboard
-vim.keymap.set("n", "y", '"+y', { noremap = true, silent = true })
-vim.keymap.set("v", "y", '"+y', { noremap = true, silent = true })
+map("n", "<leader>y", '"+y', opts)
+map("v", "<leader>y", '"+y', opts)
 
 --when you highlight, you can move lines. in highlight mode try shift+j/k to move
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
+map("v", "K", ":m '<-2<cr>gv=gv")
+map("v", "J", ":m '>+1<cr>gv=gv")
 
 -- navigate through page with halp page length and remain curson in the middle.
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
 --search but keep the curson in the middle
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- use O or o to crate new lines without transition into insert mode.
-vim.keymap.set("n", "<leader>o", "o<esc>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>O", "O<esc>", { noremap = true, silent = true })
+map("n", "<leader>o", "o<esc>", opts)
+map("n", "<leader>O", "O<esc>", opts)
 
 -- Open diagnostic flaot winow
-vim.keymap.set("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
 -- jump to diagnostic
--- vim.keymap.set("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
--- vim.keymap.set("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
+-- map("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+-- map("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 
-vim.keymap.set("n", "0", "^", { noremap = true, silent = true })
+map("n", "0", "^", opts)
