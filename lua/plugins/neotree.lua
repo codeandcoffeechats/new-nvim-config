@@ -8,21 +8,35 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	config = function()
-
-    require("neo-tree").setup({
-      close_if_last_window = true,
-      window = {
-        position = "float"
-      }
-    })
+		require("neo-tree").setup({
+			close_if_last_window = true,
+			window = {
+				position = "current",
+			},
+			filesystem = {
+				filtered_items = {
+					hide_dotfiles = true,
+					hide_by_name = { "node_modules" },
+					always_show = {
+						".gitignore",
+					},
+					always_show_by_pattern = {
+						".env*",
+					},
+				},
+			},
+			update_focused_file = {
+				enable = true,
+			},
+		})
 
 		local function open_neotree_cwd()
 			local cwd = vim.fn.expand("%:p:h")
-			vim.cmd("Neotree reveal left " .. cwd)
+			vim.cmd("Neotree reveal toggle " .. cwd)
 		end
 
 		-- Key mappings
 		vim.keymap.set("n", "<leader>E", open_neotree_cwd, {})
-		vim.keymap.set("n", "<leader>e", '<Cmd>Neotree float toggle<CR><CR>', {})
+		vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal toggle<CR><CR>", {})
 	end,
 }
