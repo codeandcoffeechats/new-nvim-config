@@ -97,10 +97,16 @@ map("n", "<leader>o", "o<esc>", opts)
 map("n", "<leader>O", "O<esc>", opts)
 
 -- Open diagnostic flaot winow
-map("n", "<leader>df", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+map("n", "<leader>df", function()
+  vim.diagnostic.open_float()
+end, opts)
 
 -- jump to diagnostic
--- map("n", "leader>dn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
--- map("n", "leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+map("n", "<leader>dn", function()
+  vim.diagnostic.goto_next()
+end, opts)
+map("n", "<leader>dp", function()
+  vim.diagnostic.goto_next()
+end, opts)
 
 map("n", "0", "^", opts)

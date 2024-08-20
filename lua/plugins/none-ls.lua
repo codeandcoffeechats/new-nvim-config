@@ -7,6 +7,9 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.prettier,
 				null_ls.builtins.formatting.black,
+        null_ls.builtins.completion.spell,
+        null_ls.builtins.completion.luasnip,
+        null_ls.builtins.formatting.biome,
 			},
 		})
 		vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
