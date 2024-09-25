@@ -76,6 +76,9 @@ map("v", "p", '"_dP', opts)
 map("n", "x", '"_x', opts)
 map("v", "x", '"_x', opts)
 
+-- delete previous word
+map("i", "C-BS", "C-W", opts)
+
 -- Yank to the system clipboard
 map("n", "<leader>y", '"+y', opts)
 map("v", "<leader>y", '"+y', opts)

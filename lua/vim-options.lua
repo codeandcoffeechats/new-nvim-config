@@ -19,5 +19,22 @@ vim.opt.expandtab = true
 vim.opt.mouse = "a"
 vim.opt.smartindent = true
 vim.opt.swapfile = false
+vim.opt.clipboard = "unnamedplus"
 
 vim.o.signcolumn = "yes"
+
+-- Add clickboard support
+if vim.fn.has("wsl") == 1 then
+	vim.g.clipboard = {
+		name = "WslClipboard",
+		copy = {
+			["+"] = "clip.exe",
+			["*"] = "clip.exe",
+		},
+		paste = {
+			["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		},
+		cache_enabled = 0,
+	}
+end
