@@ -113,3 +113,9 @@ map("n", "<leader>dp", function()
 end, opts)
 
 map("n", "0", "^", opts)
+
+-- save file
+map("n", "<leader>w", ":w<CR>", opts)
+
+-- erase highlight
+map("n", "<C-n>", ":nohl<CR>", opts)
