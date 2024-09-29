@@ -24,6 +24,8 @@ return {
 			"solargraph",
 			"html",
 			"lua_ls",
+			"gopls",
+			"delv",
 		},
 	},
 	{
@@ -58,6 +60,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.gopls.setup({
 				capabilities = capabilities,
 			})
 

@@ -23,6 +23,8 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.o.signcolumn = "yes"
 
+vim.opt.termguicolors = true
+
 -- Add clickboard support
 if vim.fn.has("wsl") == 1 then
 	vim.g.clipboard = {

@@ -11,9 +11,14 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"onsails/lspkind-nvim",
+		},
 		config = function()
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			local lspkind = require("lspkind")
 
 			cmp.setup({
 				snippet = {
@@ -38,6 +43,13 @@ return {
 					{ name = "buffer" }, -- Buffer completions (for variable/words in the current buffer(file)
 					{ name = "path" },
 				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						maxwidth = 70,
+						show_labelDetails = true,
+					}),
+				},
 			})
 		end,
 	},

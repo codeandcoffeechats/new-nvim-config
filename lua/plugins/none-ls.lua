@@ -8,6 +8,7 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.prettier,
 				null_ls.builtins.formatting.black,
+				null_ls.builtins.diagnostics.golangci_lint,
 				-- null_ls.builtins.completion.luasnip,
 				null_ls.builtins.formatting.biome,
 			},
