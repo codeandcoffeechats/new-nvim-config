@@ -26,6 +26,7 @@ return {
 			"lua_ls",
 			"gopls",
 			"delv",
+			"sqlls",
 		},
 	},
 	{
@@ -63,6 +64,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.sqlls.setup({
 				capabilities = capabilities,
 			})
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
