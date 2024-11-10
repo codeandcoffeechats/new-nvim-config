@@ -31,9 +31,15 @@ return {
 					previewer = false,
 				})
 			end
+			-- Function to search for word under cursor
+			local grep_word_under_cursor = function()
+				local word = vim.fn.expand("<cword>")
+				builtin.grep_string({ search = word })
+			end
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>fh", find_with_dotfiles, {})
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+			vim.keymap.set("n", "<leader>fG", grep_word_under_cursor, {})
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, {})
 			-- to also include dot files.
 			-- vim.keymap.set(
