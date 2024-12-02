@@ -10,9 +10,9 @@ return {
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
-			window = {
-				position = "current",
-			},
+			-- window = {
+			-- 	position = "current",
+			-- },
 			filesystem = {
 				filtered_items = {
 					hide_dotfiles = true,

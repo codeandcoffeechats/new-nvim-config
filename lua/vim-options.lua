@@ -21,7 +21,10 @@ vim.opt.smartindent = true
 vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.laststatus = 3
+
 vim.o.signcolumn = "yes"
+-- vim.opt.cursorline = true
 
 vim.opt.termguicolors = true
 

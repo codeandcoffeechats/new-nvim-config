@@ -1,7 +1,7 @@
 local map = vim.keymap
 local opts = { noremap = true, silent = true }
 
-map.set("i", "jk", "<Esc>", {})
+map.set("i", "jk", "<Esc>", opts)
 
 -- copy in Visula mode
 map.set("v", "<C-c>", '"+y', opts)
@@ -94,21 +94,25 @@ map.set("n", "<leader>O", "O<esc>", opts)
 
 -- Open diagnostic flaot winow
 map.set("n", "<leader>df", function()
-	vim.diagnostic.open_float()
+  vim.diagnostic.open_float()
 end, opts)
 
 -- jump to diagnostic
 map.set("n", "<leader>dn", function()
-	vim.diagnostic.goto_next()
+  vim.diagnostic.goto_next()
 end, opts)
 map.set("n", "<leader>dp", function()
-	vim.diagnostic.goto_next()
+  vim.diagnostic.goto_next()
 end, opts)
 
-map.set("n", "0", "^", opts)
+map.set("n",
+  "0", "^", opts)
 
 -- save file
-map.set("n", "<leader>w", ":w<CR>", opts)
+map.set("n", "<leader>w", function()
+  vim.lsp.buf.format({ async = false })
+  vim.cmd('write')
+end, opts)
 
 -- erase highlight
 map.set("n", "<esc>", ":nohl<CR>", opts)
