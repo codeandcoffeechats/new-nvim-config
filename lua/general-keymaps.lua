@@ -19,10 +19,10 @@ map.set("n", "<C-k>", "<C-w>k", opts)
 map.set("n", "<C-l>", "<C-w>l", opts)
 
 -- Resize window using <ctrl> arrow keys
-map.set("n", "<C-Up>", "<cmd>resize +6<cr>", { desc = "Increase Window Height" })
-map.set("n", "<C-Down>", "<cmd>resize 2<cr>", { desc = "Decrease Window Height" })
-map.set("n", "<C-Left>", "<cmd>vertical resize 2<cr>", { desc = "Decrease Window Width" })
-map.set("n", "<C-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase Window Width" })
+map.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move Lines
 map.set("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Down" })
@@ -49,10 +49,6 @@ map.set("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
 map.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- windows
-map.set("n", "<leader>ww", "<C-W>p", opts)
-map.set("n", "<leader>wd", "<C-W>c", opts)
-map.set("n", "<leader>w-", "<C-W>s", opts)
-map.set("n", "<leader>w|", "<C-W>v", opts)
 map.set("n", "<leader>-", "<C-W>s", opts)
 map.set("n", "<leader>|", "<C-W>v", opts)
 
