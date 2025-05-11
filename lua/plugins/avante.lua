@@ -10,6 +10,12 @@ return {
       sidebar = {
         switch_windows = "<alt-tab>"
       }
+    },
+    windows = {
+      width = 40,
+      input = {
+        height = 6,
+      },
     }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

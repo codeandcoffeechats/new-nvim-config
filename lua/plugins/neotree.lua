@@ -36,7 +36,7 @@ return {
 		end
 
 		-- Key mappings
-		vim.keymap.set("n", "<leader>E", open_neotree_cwd, {})
-		vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal toggle<CR><CR>", {})
+		vim.keymap.set("n", "<leader>E", open_neotree_cwd, { desc = "Open NeoTree at current file's directory" })
+		vim.keymap.set("n", "<leader>e", "<Cmd>Neotree reveal toggle<CR><CR>", { desc = "Toggle NeoTree" })
 	end,
 }

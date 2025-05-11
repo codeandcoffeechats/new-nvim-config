@@ -1,114 +1,119 @@
 local map = vim.keymap
-local opts = { noremap = true, silent = true }
 
-map.set("i", "jk", "<Esc>", opts)
+-- Exit insert mode with jk
+map.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode", noremap = true, silent = true })
 
--- copy in Visula mode
-map.set("v", "<C-c>", '"+y', opts)
+-- Copy to system clipboard in Visual mode
+map.set("v", "<C-c>", '"+y', { desc = "Copy to System Clipboard", noremap = true, silent = true })
 
--- better up/down
-map.set({ "n", "x" }, "j", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map.set({ "n", "x" }, "<Down>", "v:count == 4 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map.set({ "n", "x" }, "k", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map.set({ "n", "x" }, "<Up>", "v:count == 4 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+-- Better up/down movement with wrapped lines
+map.set({ "n", "x" }, "j", "v:count == 4 ? 'gj' : 'j'",
+  { desc = "Down (respects wrapped lines)", expr = true, silent = true })
+map.set({ "n", "x" }, "<Down>", "v:count == 4 ? 'gj' : 'j'",
+  { desc = "Down (respects wrapped lines)", expr = true, silent = true })
+map.set({ "n", "x" }, "k", "v:count == 4 ? 'gk' : 'k'",
+  { desc = "Up (respects wrapped lines)", expr = true, silent = true })
+map.set({ "n", "x" }, "<Up>", "v:count == 4 ? 'gk' : 'k'",
+  { desc = "Up (respects wrapped lines)", expr = true, silent = true })
 
--- Move to window using the <ctrl> hjkl keys
-map.set("n", "<C-h>", "<C-w>h", opts)
-map.set("n", "<C-j>", "<C-w>j", opts)
-map.set("n", "<C-k>", "<C-w>k", opts)
-map.set("n", "<C-l>", "<C-w>l", opts)
+-- Window navigation with Ctrl + hjkl
+map.set("n", "<C-h>", "<C-w>h", { desc = "Navigate to Left Window", noremap = true, silent = true })
+map.set("n", "<C-j>", "<C-w>j", { desc = "Navigate to Bottom Window", noremap = true, silent = true })
+map.set("n", "<C-k>", "<C-w>k", { desc = "Navigate to Top Window", noremap = true, silent = true })
+map.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Window", noremap = true, silent = true })
 
--- Resize window using <ctrl> arrow keys
+-- Resize windows using Ctrl + arrow keys
 map.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- Move Lines
-map.set("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Down" })
-map.set("n", "<A-k>", "<cmd>m .2<cr>==", { desc = "Move Up" })
-map.set("i", "<A-j>", "<esc><cmd>m .+5<cr>==gi", { desc = "Move Down" })
-map.set("i", "<A-k>", "<esc><cmd>m .2<cr>==gi", { desc = "Move Up" })
-map.set("v", "<A-j>", ":m '>+5<cr>gv=gv", { desc = "Move Down" })
-map.set("v", "<A-k>", ":m '<2<cr>gv=gv", { desc = "Move Up" })
+-- Move current line/selection up or down
+map.set("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Line Down 5 Lines" })
+map.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Line Up 2 Lines" })
+map.set("i", "<A-j>", "<esc><cmd>m .+5<cr>==gi", { desc = "Move Line Down 5 Lines (Insert Mode)" })
+map.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Line Up 2 Lines (Insert Mode)" })
+map.set("v", "<A-j>", ":m '>+5<cr>gv=gv", { desc = "Move Selection Down 5 Lines" })
+map.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Selection Up 2 Lines" })
 
--- save file
+-- Save file with Ctrl+S in multiple modes
 map.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
---keywordprg
-map.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+-- Access keyword program (K in normal mode)
+map.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg (K command)" })
 
--- better indenting
-map.set("v", "<", "<gv")
-map.set("v", ">", ">gv")
+-- Better indenting in visual mode (maintain selection)
+map.set("v", "<", "<gv", { desc = "Decrease Indent and Keep Selection" })
+map.set("v", ">", ">gv", { desc = "Increase Indent and Keep Selection" })
 
--- lazy
-map.set("n", "<leader>l", ":Lazy<cr>", { desc = "Lazy" })
+-- Open Lazy plugin manager
+map.set("n", "<leader>l", ":Lazy<cr>", { desc = "Open Lazy Plugin Manager" })
 
--- new file
+-- Create a new empty buffer/file
 map.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- windows
-map.set("n", "<leader>-", "<C-W>s", opts)
-map.set("n", "<leader>|", "<C-W>v", opts)
+-- Split windows horizontally and vertically
+map.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Horizontally", noremap = true, silent = true })
+map.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Vertically", noremap = true, silent = true })
 
--- select all
-map.set("n", "<C-a>", "ggVG", {})
+-- Select entire file content
+map.set("n", "<C-a>", "ggVG", { desc = "Select All Text" })
 
--- keybinding to prevent yanking while changing or Deleting text.
-map.set("n", "<leader>dd", '"_dd', opts)
-map.set("v", "<leader>d", '"_d', opts)
-map.set("n", "cc", '"_cc', opts)
-map.set("v", "c", '"_c', opts)
-map.set("n", "D", '"_D', opts)
-map.set("v", "D", '"_D', opts)
-map.set("n", "C", '"_C', opts)
-map.set("v", "C", '"_C', opts)
-map.set("n", "p", "p", opts)
-map.set("v", "p", '"_dP', opts)
-map.set("n", "x", '"_x', opts)
-map.set("v", "x", '"_x', opts)
+-- Keybindings to delete/change without yanking
+map.set("n", "<leader>dd", '"_dd', { desc = "Delete Line (No Yank)", noremap = true, silent = true })
+map.set("v", "<leader>d", '"_d', { desc = "Delete Selection (No Yank)", noremap = true, silent = true })
+map.set("n", "cc", '"_cc', { desc = "Change Line (No Yank)", noremap = true, silent = true })
+map.set("v", "c", '"_c', { desc = "Change Selection (No Yank)", noremap = true, silent = true })
+map.set("n", "D", '"_D', { desc = "Delete to End of Line (No Yank)", noremap = true, silent = true })
+map.set("v", "D", '"_D', { desc = "Delete to End of Line in Selection (No Yank)", noremap = true, silent = true })
+map.set("n", "C", '"_C', { desc = "Change to End of Line (No Yank)", noremap = true, silent = true })
+map.set("v", "C", '"_C', { desc = "Change to End of Line in Selection (No Yank)", noremap = true, silent = true })
+map.set("n", "p", "p", { desc = "Paste", noremap = true, silent = true })
+map.set("v", "p", '"_dP', { desc = "Paste Over Selection (No Yank)", noremap = true, silent = true })
+map.set("n", "x", '"_x', { desc = "Delete Character (No Yank)", noremap = true, silent = true })
+map.set("v", "x", '"_x', { desc = "Delete Selection (No Yank)", noremap = true, silent = true })
 
--- delete previous word
-map.set("i", "C-BS", "C-W", opts)
+-- Delete previous word in insert mode
+map.set("i", "<C-BS>", "<C-W>", { desc = "Delete Previous Word", noremap = true, silent = true })
 
--- Yank to the system clipboard
-map.set("n", "<leader>y", '"+y', opts)
-map.set("v", "<leader>y", '"+y', opts)
+-- Yank to system clipboard
+map.set("n", "<leader>y", '"+y', { desc = "Yank to System Clipboard", noremap = true, silent = true })
+map.set("v", "<leader>y", '"+y', { desc = "Yank Selection to System Clipboard", noremap = true, silent = true })
 
--- navigate through page with halp page length and remain curson in the middle.
-map.set("n", "<C-d>", "<C-d>zz")
-map.set("n", "<C-u>", "<C-u>zz")
+-- Scroll and keep cursor in the middle
+map.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll Down Half Page (Cursor Centered)" })
+map.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll Up Half Page (Cursor Centered)" })
 
---search but keep the curson in the middle
-map.set("n", "n", "nzzzv")
-map.set("n", "N", "Nzzzv")
+-- Search navigation with cursor centered
+map.set("n", "n", "nzzzv", { desc = "Next Search Result (Cursor Centered)" })
+map.set("n", "N", "Nzzzv", { desc = "Previous Search Result (Cursor Centered)" })
 
--- use O or o to crate new lines without transition into insert mode.
-map.set("n", "<leader>o", "o<esc>", opts)
-map.set("n", "<leader>O", "O<esc>", opts)
+-- Create new lines without entering insert mode
+map.set("n", "<leader>o", "o<esc>", { desc = "Create Empty Line Below", noremap = true, silent = true })
+map.set("n", "<leader>O", "O<esc>", { desc = "Create Empty Line Above", noremap = true, silent = true })
 
--- Open diagnostic flaot winow
+-- Diagnostic functions
 map.set("n", "<leader>df", function()
   vim.diagnostic.open_float()
-end, opts)
+end, { desc = "Open Diagnostic Float Window", noremap = true, silent = true })
 
--- jump to diagnostic
+-- Navigate diagnostics
 map.set("n", "<leader>dn", function()
   vim.diagnostic.goto_next()
-end, opts)
+end, { desc = "Go to Next Diagnostic", noremap = true, silent = true })
+
 map.set("n", "<leader>dp", function()
-  vim.diagnostic.goto_next()
-end, opts)
+  vim.diagnostic.goto_prev()
+end, { desc = "Go to Previous Diagnostic", noremap = true, silent = true })
 
-map.set("n",
-  "0", "^", opts)
+-- Move to first non-whitespace character
+map.set("n", "0", "^", { desc = "Go to First Non-Whitespace Character", noremap = true, silent = true })
 
--- save file
+-- Format and save file
 map.set("n", "<leader>w", function()
   vim.lsp.buf.format({ async = false })
   vim.cmd('write')
-end, opts)
+end, { desc = "Format and Save File", noremap = true, silent = true })
 
--- erase highlight
-map.set("n", "<esc>", ":nohl<CR>", opts)
+-- Clear search highlighting
+map.set("n", "<esc>", ":nohl<CR>", { desc = "Clear Search Highlighting", noremap = true, silent = true })
