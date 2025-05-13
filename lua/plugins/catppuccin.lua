@@ -9,7 +9,7 @@ return {
       highlight_overrides = {
         all = function(colors)
           return {
-            CursorLineNr = { fg = "#f1c40f" },
+            CursorLineNr = { fg = colors.peach },
           }
         end,
       },
