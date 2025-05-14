@@ -36,25 +36,21 @@ return {
 
 			local lspconfig = require("lspconfig")
 			local servers = {
-				"pyright",
-				"biome",
-				"jsonls",
-				"marksman",
-				"tailwindcss",
-				"cssls",
-				"eslint",
-				"ts_ls",
-				"solargraph",
-				"html",
-				"lua_ls",
-				"gopls",
-				"sqlls",
+				"pyright", -- Python
+				"ts_ls", -- TypeScript
+				"lua_ls", -- Lua
+				"gopls", -- Go
+				"jsonls", -- JSON
+				"html", -- HTML
+				"cssls", -- CSS
+				"marksman", -- Markdown
+				"sqlls", -- SQL
 			}
-			for _, server in ipairs(servers) do
-				lspconfig[server].setup({
-					capabilities = capabilities,
-				})
-			end
+			-- for _, server in ipairs(servers) do
+			-- 	lspconfig[server].setup({
+			-- 		capabilities = capabilities,
+			-- 	})
+			-- end
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
 			vim.lsp.handlers["textDocument/signatureHelp"] =
