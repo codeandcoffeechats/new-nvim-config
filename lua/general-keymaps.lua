@@ -7,14 +7,30 @@ map.set("i", "jk", "<Esc>", { desc = "Exit Insert Mode", noremap = true, silent 
 map.set("v", "<C-c>", '"+y', { desc = "Copy to System Clipboard", noremap = true, silent = true })
 
 -- Better up/down movement with wrapped lines
-map.set({ "n", "x" }, "j", "v:count == 4 ? 'gj' : 'j'",
-  { desc = "Down (respects wrapped lines)", expr = true, silent = true })
-map.set({ "n", "x" }, "<Down>", "v:count == 4 ? 'gj' : 'j'",
-  { desc = "Down (respects wrapped lines)", expr = true, silent = true })
-map.set({ "n", "x" }, "k", "v:count == 4 ? 'gk' : 'k'",
-  { desc = "Up (respects wrapped lines)", expr = true, silent = true })
-map.set({ "n", "x" }, "<Up>", "v:count == 4 ? 'gk' : 'k'",
-  { desc = "Up (respects wrapped lines)", expr = true, silent = true })
+map.set(
+	{ "n", "x" },
+	"j",
+	"v:count == 4 ? 'gj' : 'j'",
+	{ desc = "Down (respects wrapped lines)", expr = true, silent = true }
+)
+map.set(
+	{ "n", "x" },
+	"<Down>",
+	"v:count == 4 ? 'gj' : 'j'",
+	{ desc = "Down (respects wrapped lines)", expr = true, silent = true }
+)
+map.set(
+	{ "n", "x" },
+	"k",
+	"v:count == 4 ? 'gk' : 'k'",
+	{ desc = "Up (respects wrapped lines)", expr = true, silent = true }
+)
+map.set(
+	{ "n", "x" },
+	"<Up>",
+	"v:count == 4 ? 'gk' : 'k'",
+	{ desc = "Up (respects wrapped lines)", expr = true, silent = true }
+)
 
 -- Window navigation with Ctrl + hjkl
 map.set("n", "<C-h>", "<C-w>h", { desc = "Navigate to Left Window", noremap = true, silent = true })
@@ -94,26 +110,26 @@ map.set("n", "<leader>O", "O<esc>", { desc = "Create Empty Line Above", noremap 
 
 -- Diagnostic functions
 map.set("n", "<leader>df", function()
-  vim.diagnostic.open_float()
+	vim.diagnostic.open_float()
 end, { desc = "Open Diagnostic Float Window", noremap = true, silent = true })
 
 -- Navigate diagnostics
 map.set("n", "<leader>dn", function()
-  vim.diagnostic.goto_next()
+	vim.diagnostic.goto_next()
 end, { desc = "Go to Next Diagnostic", noremap = true, silent = true })
 
 map.set("n", "<leader>dp", function()
-  vim.diagnostic.goto_prev()
+	vim.diagnostic.goto_prev()
 end, { desc = "Go to Previous Diagnostic", noremap = true, silent = true })
 
 -- Move to first non-whitespace character
 map.set("n", "0", "^", { desc = "Go to First Non-Whitespace Character", noremap = true, silent = true })
 
 -- Format and save file
-map.set("n", "<leader>w", function()
-  vim.lsp.buf.format({ async = false })
-  vim.cmd('write')
-end, { desc = "Format and Save File", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>w", function()
+	-- vim.lsp.buf.format({ async = false }) // cus we got conform format on save
+	vim.cmd("write")
+end, { desc = "Save File", noremap = true, silent = true })
 
 -- Clear search highlighting
 map.set("n", "<esc>", ":nohl<CR>", { desc = "Clear Search Highlighting", noremap = true, silent = true })

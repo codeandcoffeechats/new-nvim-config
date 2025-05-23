@@ -24,10 +24,10 @@ return { -- Autoformat
 			python = { "black" },
 			--
 			-- You can use 'stop_after_first' to run the first available formatter from the list
-			typescript = { "prettierd", "prettier", stop_after_first = true },
-			html = { "prettierd" },
-			json = { "prettierd" },
-			markdown = { "prettierd" },
+			typescript = { "prettier" },
+			html = { "prettier" },
+			json = { "prettier" },
+			markdown = { "prettier" },
 			tailwindcss = { "rustywind" },
 			css = { "prettierd" },
 			golang = { "gofumpt" },

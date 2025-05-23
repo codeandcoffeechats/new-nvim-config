@@ -12,7 +12,7 @@ return {
 			require("telescope").setup({
 				defaults = {
 					theme = "ivy",
-					mappings = {
+					keymappings = {
 						n = {
 							["q"] = require("telescope.actions").close,
 						},

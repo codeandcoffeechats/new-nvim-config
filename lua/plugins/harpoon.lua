@@ -25,6 +25,6 @@ return {
 		end, { desc = "Select 3rd file in Harpoon" })
 		vim.keymap.set("n", "<C-s>", function()
 			harpoon:list():select(4)
-end, { desc = "Select 4th file in Harpoon" })
+		end, { desc = "Select 4th file in Harpoon" })
 	end,
 }
