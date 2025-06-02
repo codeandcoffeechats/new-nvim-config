@@ -86,10 +86,14 @@ return {
 			},
 		})
 
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-		vim.lsp.handlers["textDocument/signatureHelp"] =
-			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+		-- vim.keymap.set("n", "K", function()
+		-- 	vim.lsp.buf.hover({
+		-- 		border = "rounded",
+		-- 		max_width = 80,
+		-- 		focusable = true,
+		-- 		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+		-- 	})
+		-- end, { desc = "LSP Hover" }) -- is handled by noice plugin
 
 		vim.diagnostic.config({
 			float = {
