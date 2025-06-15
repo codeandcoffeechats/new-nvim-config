@@ -20,16 +20,11 @@ return { -- Autoformat
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			-- Conform can also run multiple formatters sequentially
 			python = { "black" },
-			--
-			-- You can use 'stop_after_first' to run the first available formatter from the list
-			typescript = { "prettier" },
-			html = { "prettier" },
-			json = { "prettier" },
-			markdown = { "prettier" },
-			tailwindcss = { "rustywind" },
-			css = { "prettierd" },
+			typescript = { "biome-check" },
+			typescriptreact = { "biome-check" },
+			json = { "biome-check" },
+			css = { "biome-check" },
 			golang = { "gofumpt" },
 			sql = { "sqlfmt" },
 		},

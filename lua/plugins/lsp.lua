@@ -101,7 +101,10 @@ return {
 			},
 			signs = true,
 			underline = false,
-			virtual_text = true,
+			virtual_text = {
+				prefix = "", -- Could be '●', '▎', 'x'
+				spacing = 4,
+			},
 		})
 
 		vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
