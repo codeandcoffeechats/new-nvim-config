@@ -6,7 +6,7 @@ return {
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = {
-				markdown = { "markdownlint" },
+				-- markdown = { "markdownlint" }, don'tt need it?
 				-- typescript = { "biomejs" },  -- was causing duplicate diagnostics as in conform.lua the biome-check seems to formatte and lint
 				-- typescriptreact = { "biomejs" }, -- same as above
 				Go = { "golangci_lint" },
