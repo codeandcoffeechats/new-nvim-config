@@ -36,12 +36,15 @@ return {
 				"html",
 				"lua_ls",
 				"gopls",
-				"sqlls",
+				"sqls",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
+						on_attach = function(client, bufnr)
+							require("sqls").on_attach(client, bufnr)
+						end,
 					})
 				end,
 			},
