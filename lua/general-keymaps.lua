@@ -39,10 +39,10 @@ map.set("n", "<C-k>", "<C-w>k", { desc = "Navigate to Top Window", noremap = tru
 map.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Window", noremap = true, silent = true })
 
 -- Resize windows using Ctrl + arrow keys
-map.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+map.set("n", "<C-S-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map.set("n", "<C-S-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map.set("n", "<C-S-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map.set("n", "<C-S-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- Move current line/selection up or down
 map.set("n", "<A-j>", "<cmd>m .+5<cr>==", { desc = "Move Line Down 5 Lines" })
