@@ -108,13 +108,16 @@ return {
     },
     opts = {
       window = {
+        layout = "vertical",
+        border = "rounded",
         width = 0.4,
+        relative = "editor",
       },
       question_header = "👤 User ",
       answer_header = "🤖 Copilot ",
       error_header = "🔴 Error ",
       prompts = prompts,
-      model = "gpt-5",
+      model = "claude-sonnet-4",
       mappings = {
         -- Use tab for completion
         complete = {
