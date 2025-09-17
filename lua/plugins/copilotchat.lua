@@ -1,5 +1,5 @@
 local prompts = {
-  -- Code related prompts
+  -- Code related prompts (from your original table)
   Explain = "Explain how this code works step by step, including its purpose, key logic, and any important details.",
   Review =
   "Review this code for potential issues, bugs, performance problems, and suggest specific improvements with examples.",
@@ -12,20 +12,37 @@ local prompts = {
   BetterNamings = "Suggest more descriptive and meaningful names for variables, functions, and classes in this code.",
   Documentation =
   "Generate clear, comprehensive documentation including purpose, parameters, return values, and usage examples.",
-  -- Text related prompts
+  -- Text related prompts (from your original table)
   Summarize = "Create a concise summary highlighting the key points and main ideas from this text.",
   Spelling = "Fix all grammar, spelling, and punctuation errors while maintaining the original meaning and tone.",
   Wording = "Improve clarity, flow, and professional tone while keeping the original message intact.",
   Concise = "Rewrite this text to be more concise while preserving all important information and meaning.",
+  -- New code-related prompts
+  Optimize =
+  "Analyze this code for performance bottlenecks and suggest optimizations with explanations and code examples.",
+  DesignPattern =
+  "Identify the most suitable design pattern for this code and provide an example implementation with explanations.",
+  Security = "Review this code for security vulnerabilities and suggest specific fixes to ensure robust protection.",
+  Convert =
+  "Convert this code to [specify target language/framework], ensuring equivalent functionality and best practices.",
+  Debug =
+  "Step through this code to identify why it produces incorrect output, and provide a fix with detailed reasoning.",
+  Comment =
+  "Add clear, concise comments to this code to explain its logic, purpose, and key sections for better maintainability.",
+  Scalability =
+  "Evaluate this code for scalability issues and suggest improvements to handle increased load or data volume.",
+  UserStory =
+  "Write a user story for this feature, including acceptance criteria and edge cases, in standard Agile format.",
 }
 
 -- Helper function to create ask keymaps with both normal and visual modes
-local function create_ask_keymap(key, prompt, desc)
+local function create_ask_keymap(key, prompt_key, desc)
+  local prompt = prompts[prompt_key]
   return {
     {
       key,
       function()
-        require("CopilotChat").ask(prompt, { selection = require("CopilotChat.select").buffer })
+        require("CopilotChat").ask("#buffers:visible\n\n" .. prompt)
       end,
       mode = "n",
       desc = "CopilotChat - " .. desc,
@@ -33,7 +50,7 @@ local function create_ask_keymap(key, prompt, desc)
     {
       key,
       function()
-        require("CopilotChat").ask(prompt, { selection = require("CopilotChat.select").visual })
+        require("CopilotChat").ask("#selection\n\n" .. prompt)
       end,
       mode = "v",
       desc = "CopilotChat - " .. desc,
@@ -47,15 +64,16 @@ local function create_prompt_keymap(key, desc)
     {
       key,
       function()
-        require("CopilotChat").select_prompt({
-          context = { "buffers" },
-        })
+        -- Open prompt selection UI
+        require("CopilotChat").select_prompt()
       end,
+      mode = "n",
       desc = "CopilotChat - " .. desc,
     },
     {
       key,
       function()
+        -- Open prompt selection UI
         require("CopilotChat").select_prompt()
       end,
       mode = "x",
@@ -65,7 +83,7 @@ local function create_prompt_keymap(key, desc)
 end
 
 
--- Helper function to setup autocommands
+--j
 local function setup_autocommands()
   vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "copilot-*",
@@ -94,18 +112,42 @@ local function flatten_keymaps(keymaps)
   return result
 end
 
+
+
+local modified_prompts = {}
+for key, prompt in pairs(prompts) do
+  modified_prompts[key] = "#buffers:visible\n\n" .. prompt
+end
+
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
-    -- version = "v3.7.0",
     dependencies = {
-      { "nvim-lua/plenary.nvim" },
       {
-        "nvim-treesitter/nvim-treesitter",
-        opts = { ensure_installed = { "diff", "markdown" } },
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = {
+          "nvim-treesitter/nvim-treesitter",
+          "nvim-tree/nvim-web-devicons"
+        },
+        opts = {
+          file_types = { "markdown", "copilot-chat" },
+          anti_conceal = {
+            enabled = false, -- Disable to keep rendering on cursor line
+          },
+          completions = {
+            lsp = { enabled = true }, -- Enable LSP completions for checkboxes/callouts
+          },
+          -- Additional options if needed, e.g., for code blocks
+          code = {
+            enabled = true,
+            style = {
+              background = "Normal", -- Or customize as needed
+            },
+          },
+        },
       },
     },
+    branch = "main",
     opts = {
       window = {
         layout = "vertical",
@@ -113,10 +155,15 @@ return {
         width = 0.4,
         relative = "editor",
       },
-      question_header = "👤 User ",
-      answer_header = "🤖 Copilot ",
-      error_header = "🔴 Error ",
-      prompts = prompts,
+      headers = {
+        user = '-🧑🏼‍💻sajidcodes',
+        assistant = '- 🤖 Copilot',
+        tool = '- 🔧 Tool',
+      },
+
+      auto_fold = true, -- Automatically folds non-assistant messages
+
+      prompts = modified_prompts,
       model = "claude-sonnet-4",
       mappings = {
         -- Use tab for completion
@@ -152,19 +199,11 @@ return {
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
-      local select = require("CopilotChat.select")
-
-      local user = "User"
-      opts.question_header = "  " .. user .. " "
-      opts.answer_header = "  Copilot "
-
-      -- Override the git prompts message
       opts.prompts.Commit = {
-        prompt =
-        '> #git:staged\n\nWrite commit message with commitizen convention. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
-      }
-
-      chat.setup(opts)
+            prompt =
+            '> #git:staged\n\nWrite commit message with commitizen convention. Write clear, informative commit messages that explain the "what" and "why" behind changes, not just the "how".',
+          },
+          chat.setup(opts)
       setup_autocommands()
     end,
     keys = flatten_keymaps({
@@ -176,7 +215,7 @@ return {
       create_ask_keymap("<leader>ar", "Review", "Review code"),
       create_ask_keymap("<leader>aR", "Refactor", "Refactor code"),
       create_ask_keymap("<leader>an", "BetterNamings", "Better Naming"),
-
+      -- Override the git prompts message
       -- Chat commands
       {
         "<leader>ai",
@@ -193,17 +232,28 @@ return {
         "<cmd>CopilotChatCommit<cr>",
         desc = "CopilotChat - Generate commit message for all changes",
       },
+      -- Quick chat for normal mode (entire buffer)
       {
         "<leader>aq",
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
-            require("CopilotChat").ask(input, {
-              selection = require("CopilotChat.select").buffer,
-            })
+            require("CopilotChat").ask("#buffers:visible\n\n" .. input)
           end
         end,
-        desc = "CopilotChat - Quick chat",
+        desc = "CopilotChat - Quick chat with buffer",
+      },
+      -- Quick chat for visual mode (selected text)
+      {
+        "<leader>aq",
+        function()
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask("#selection\n\n" .. input)
+          end
+        end,
+        mode = "v",
+        desc = "CopilotChat - Quick chat with selection",
       },
 
       -- Utility commands
@@ -211,14 +261,7 @@ return {
       { "<leader>al", "<cmd>CopilotChatReset<cr>",    desc = "CopilotChat - Clear buffer and chat history" },
       { "<leader>aa", "<cmd>CopilotChatToggle<cr>",   desc = "CopilotChat - Toggle" },
       { "<leader>a?", "<cmd>CopilotChatModels<cr>",   desc = "CopilotChat - Select Models" },
+      { "<leader>as", "<cmd>CopilotChatStop<cr>",     desc = "CopilotChat - Stop current response" },
     }),
-  },
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    optional = false,
-    opts = {
-      file_types = { "markdown", "copilot-chat" },
-    },
-    ft = { "markdown", "copilot-chat" },
   },
 }
