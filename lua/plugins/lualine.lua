@@ -14,9 +14,10 @@ return {
         lualine_c = {
           {
             "filename",
-            path = 1,       -- 0 = just filename, 1 = relative path, 2 = absolute path
+            path = 1,             -- 0 = just filename, 1 = relative path, 2 = absolute path
             file_status = true,
             shorting_target = 40, -- Shortens path to leave 40 spaces for other components
+            color = { gui = "bold" }, -- Make the filename text bold
           },
         },
         lualine_x = { "encoding", "fileformat", "filetype" },
